@@ -3,7 +3,7 @@
   "displayName": "Todo Kanban",
   "publisher": "Rememo",
   "description": "You often leave TODOs, FIXMEs, and other comments in your code? But managing these notes can quickly become overwhelming? Todo-Kanban allowing you to turn these comments into Kanban tasks on Rememo.io. Ideal for developers who want to maintain focus without leaving their editor.",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -22,7 +22,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -73,10 +73,12 @@
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.4.1",
     "chai": "^5.1.1",
-    "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "mocha": "^10.7.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }

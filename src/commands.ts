@@ -1,5 +1,10 @@
 import * as vscode from "vscode";
-import { createRememoTask, editRememoTask, deleteRememoTask } from "./fetch";
+import {
+  createRememoTask,
+  editRememoTask,
+  deleteRememoTask,
+  backendUrl,
+} from "./fetch";
 
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -7,7 +12,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand("createRememoTask", async (args) => {
       vscode.window.showInformationMessage(
-        `Creating task on ${process.env.BACKEND_URL}`,
+        `Creating task on ${backendUrl}`,
         JSON.stringify(args)
       );
       await createRememoTask(args);
@@ -17,7 +22,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand("editRememoTask", async (args) => {
       vscode.window.showInformationMessage(
-        `Editing task on ${process.env.BACKEND_URL}`,
+        `Editing task on ${backendUrl}`,
         JSON.stringify(args)
       );
       await editRememoTask(args);
@@ -27,7 +32,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand("deleteRememoTask", async (args) => {
       vscode.window.showInformationMessage(
-        `Deleting task on ${process.env.BACKEND_URL}`,
+        `Deleting task on ${backendUrl}`,
         JSON.stringify(args)
       );
       await deleteRememoTask(args);

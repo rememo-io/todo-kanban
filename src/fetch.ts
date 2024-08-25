@@ -8,7 +8,7 @@ import {
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const backendUrl = "https://rememo.io";
+export const backendUrl = "https://rememo.io";
 // const backendUrl = process.env.BACKEND_URL;
 
 export async function getToken(): Promise<string | undefined> {
@@ -53,9 +53,14 @@ export async function taskExistsInRememo(
     if (response.ok) {
       return true;
     } else {
-      throw new Error("Task not found or error updating task");
+      const errorMessage = await response.text();
+      vscode.window.showErrorMessage(
+        `Failed to update task. Status: ${response.status}, Message: ${errorMessage}`
+      );
+      return false;
     }
-  } catch (error) {
+  } catch (error: any) {
+    vscode.window.showErrorMessage(`Error updating task: ${error.message}`);
     console.error("Error updating task:", error);
     return false;
   }
@@ -102,7 +107,10 @@ export async function createRememoTask(task: {
       updateTodoCommentWithID(editor, taskId, task.line);
     }
   } else {
-    vscode.window.showErrorMessage("Failed to create task on rememo.io");
+    const errorMessage = await response.text();
+    vscode.window.showErrorMessage(
+      `Failed to create task. Status: ${response.status}, Message: ${errorMessage}`
+    );
   }
 }
 
@@ -156,7 +164,10 @@ export async function editRememoTask(task: {
 
     return true;
   } else {
-    vscode.window.showErrorMessage("Failed to update task on rememo.io");
+    const errorMessage = await response.text();
+    vscode.window.showErrorMessage(
+      `Failed to update task. Status: ${response.status}, Message: ${errorMessage}`
+    );
     return false;
   }
 }
@@ -199,7 +210,10 @@ export async function deleteRememoTask(task: {
     removeTaskIDFromComment(editor, task.line);
     return true;
   } else {
-    vscode.window.showErrorMessage("Failed to delete task on rememo.io");
+    const errorMessage = await response.text();
+    vscode.window.showErrorMessage(
+      `Failed to delete task. Status: ${response.status}, Message: ${errorMessage}`
+    );
     return false;
   }
 }

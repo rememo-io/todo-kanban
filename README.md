@@ -1,6 +1,6 @@
 # Todo-Kanban: Code Comments and Task Management
 
-Todo-Kanban is a VS Code extension that transforms your code annotations into actionable tasks on Rememo.io. It's designed to prevent important development notes from falling through the cracks.
+Todo-Kanban is a VS Code extension that enables TODO highlight and transforms your code annotations into actionable tasks on Rememo.io. It's designed to prevent important development notes from falling through the cracks.
 
 <img src="https://raw.githubusercontent.com/rememo-io/todo-kanban/master/static/hero.webp">
 
