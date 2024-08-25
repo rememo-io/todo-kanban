@@ -83,12 +83,12 @@ describe("Web Extension Test Suite", () => {
 
     it("should parse title and description correctly with HTML content", () => {
       const input =
-        'FIXME: Weird description: <a href="evil.com">This is a todo-tracker FIXME comment</a>';
+        'FIXME: Weird description: <a href="google.com">This is a todo-tracker FIXME comment</a>';
       const expectedOutput = {
         id: "",
         title: "Weird",
         description:
-          '<a href="evil.com">This is a todo-tracker FIXME comment</a>',
+          '<a href="google.com">This is a todo-tracker FIXME comment</a>',
       };
       assert.deepStrictEqual(parseCommentContent(input), expectedOutput);
     });

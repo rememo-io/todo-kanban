@@ -4,7 +4,7 @@ import { registerCommands } from "./commands";
 import { updateDecorations } from "./decorations";
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('Extension "todo-tracker" is now active!');
+  console.log('Extension "todo-kanban" is now active!');
 
   registerCommands(context);
   registerHoverProvider(context);
