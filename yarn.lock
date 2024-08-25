@@ -176,9 +176,9 @@
   dependencies:
     undici-types "~5.26.4"
 
-"@types/vscode@^1.92.0":
+"@types/vscode@^1.90.0":
   version "1.92.0"
-  resolved "https://registry.npmjs.org/@types/vscode/-/vscode-1.92.0.tgz"
+  resolved "https://registry.yarnpkg.com/@types/vscode/-/vscode-1.92.0.tgz#b4d6bc180e7206defe643a1a5f38a1367947d418"
   integrity sha512-DcZoCj17RXlzB4XJ7IfKdPTcTGDLYvTOcTNkvtjXWF+K2TlKzHHkBEXNWQRpBIXixNEUgx39cQeTFunY0E2msw==
 
 "@typescript-eslint/eslint-plugin@^7.14.1":

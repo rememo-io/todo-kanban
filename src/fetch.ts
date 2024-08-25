@@ -8,7 +8,8 @@ import {
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const backendUrl = process.env.BACKEND_URL;
+const backendUrl = "https://rememo.io";
+// const backendUrl = process.env.BACKEND_URL;
 
 export async function getToken(): Promise<string | undefined> {
   const token = vscode.workspace
