@@ -2,8 +2,8 @@
   "name": "todo-kanban",
   "displayName": "Todo Kanban",
   "publisher": "Rememo",
-  "description": "As a developer, you often leave TODOs, FIXMEs, and other comments in your code as reminders for later tasks. But managing these scattered notes can quickly become overwhelming, leading to missed deadlines or forgotten tasks. Todo-Kanban integrates directly into VS Code, allowing you to seamlessly turn these comments into trackable tasks on Rememo.io. It helps you stay organized by syncing your code annotations with your Kanban board, so nothing slips through the cracks. Ideal for developers who want to maintain focus without leaving their editor, Todo-Kanban bridges the gap between code and project management.",
-  "version": "0.0.1",
+  "description": "You often leave TODOs, FIXMEs, and other comments in your code? But managing these notes can quickly become overwhelming? Todo-Kanban allowing you to turn these comments into Kanban tasks on Rememo.io. Ideal for developers who want to maintain focus without leaving their editor.",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -52,6 +52,7 @@
       }
     ]
   },
+  "icon": "static/rememo-192.png",
   "repository": "https://github.com/rememo-io/todo-kanban",
   "scripts": {
     "vscode:prepublish": "yarn run compile",
