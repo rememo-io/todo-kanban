@@ -51,4 +51,9 @@ Todo-Kanban needs a Rememo.io API token. Set it in VS Code:
 Found a bug or have an idea? Open an issue or submit a pull request on GitHub.
 
 ## Licensing:
-This project uses the MIT License. Check the LICENSE file for details.
+This project uses the MIT License. Check the LICENSE file for details. 
+
+#### Credits:
+- Super Kick Gym - [Brazilian Jiu Jitsu in Bangkok](https://en.bjj-bangkok.com)
+
+- Rememo - [Free Task Management and Corporate Chat](https://rememo.io)
