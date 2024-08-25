@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { extractID, extractMatches } from "./core";
 import { TODO_REGEX, FIXME_REGEX, FIX_REGEX } from "./config";
-import { taskExistsInRememo } from "./fetch";
 
 const decorationStyles = {
   notCreated: {
@@ -137,8 +136,6 @@ export async function getTaskDecorations(
       createdHighlights.push({
         range: textRange,
       });
-
-      taskExistsInRememo(title, line);
     } else {
       defaultDecorations[match].push({
         range: new vscode.Range(

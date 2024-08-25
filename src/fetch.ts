@@ -8,62 +8,21 @@ import {
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export const backendUrl = "https://rememo.io";
-// const backendUrl = process.env.BACKEND_URL;
+// export const backendUrl = "http://localhost:5555";
+export const backendUrl = "https://api.rememo.io";
 
+// const backendUrl = process.env.BACKEND_URL;
 export async function getToken(): Promise<string | undefined> {
   const token = vscode.workspace
-    .getConfiguration("todoTracker")
+    .getConfiguration("todoKanban")
     .get<string>("apiToken");
   if (!token) {
     vscode.window.showWarningMessage(
       "API token is not set. Please add your API token in the settings."
     );
   }
+  console.log("Retrieved token:", token);
   return token;
-}
-
-export async function taskExistsInRememo(
-  commentText: string,
-  line: number
-): Promise<boolean> {
-  const id = extractID(commentText);
-  if (!id) {
-    return false;
-  }
-
-  try {
-    const token = await getToken();
-    if (!token) {
-      return false;
-    }
-    const link = generateVscodeLink(
-      vscode.window.activeTextEditor?.document.uri.fsPath || "",
-      line
-    );
-    const response = await fetch(`${backendUrl}/api/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": token,
-      },
-      body: JSON.stringify({ link }),
-    });
-
-    if (response.ok) {
-      return true;
-    } else {
-      const errorMessage = await response.text();
-      vscode.window.showErrorMessage(
-        `Failed to update task. Status: ${response.status}, Message: ${errorMessage}`
-      );
-      return false;
-    }
-  } catch (error: any) {
-    vscode.window.showErrorMessage(`Error updating task: ${error.message}`);
-    console.error("Error updating task:", error);
-    return false;
-  }
 }
 
 export async function createRememoTask(task: {
@@ -84,7 +43,13 @@ export async function createRememoTask(task: {
       rendered_description: `<p>${task.description}</p>`,
     }),
   };
-  const response = await fetch(`${backendUrl}/api/tasks`, {
+
+  const url = `${backendUrl}/api/tasks`;
+  console.log("Creating task with URL:", url);
+  console.log("API Key:", token);
+  console.log("Creating task with data:", data);
+
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -95,9 +60,13 @@ export async function createRememoTask(task: {
     }),
   });
 
+  console.log("Response status:", response.status);
+  console.log("Response headers:", response.headers);
+
   if (response.ok) {
     const responseData = (await response.json()) as any;
     const taskId = responseData.id;
+    console.log("Task created with ID:", taskId);
     vscode.window.showInformationMessage(
       `Task created on rememo.io with ID: ${taskId}`
     );
@@ -111,6 +80,7 @@ export async function createRememoTask(task: {
     vscode.window.showErrorMessage(
       `Failed to create task. Status: ${response.status}, Message: ${errorMessage}`
     );
+    console.error("Failed to create task:", errorMessage);
   }
 }
 
@@ -132,8 +102,10 @@ export async function editRememoTask(task: {
   }
 
   const lineText = editor.document.lineAt(task.line).text;
+  console.log("Editing task with line text:", lineText);
 
   const taskId = extractID(lineText);
+  console.log("Extracted task ID:", taskId);
 
   if (!taskId) {
     vscode.window.showErrorMessage("No task ID found in the selected line.");
@@ -148,7 +120,12 @@ export async function editRememoTask(task: {
     }),
   };
 
-  const response = await fetch(`${backendUrl}/api/tasks`, {
+  const url = `${backendUrl}/api/tasks`;
+  console.log("Updating task with URL:", url);
+  console.log("API Key:", token);
+  console.log("Updating task with data:", data);
+
+  const response = await fetch(url, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -156,6 +133,9 @@ export async function editRememoTask(task: {
     },
     body: JSON.stringify({ data, where: { id: taskId } }),
   });
+
+  console.log("Response status:", response.status);
+  console.log("Response headers:", response.headers);
 
   if (response.ok) {
     vscode.window.showInformationMessage(
@@ -168,6 +148,7 @@ export async function editRememoTask(task: {
     vscode.window.showErrorMessage(
       `Failed to update task. Status: ${response.status}, Message: ${errorMessage}`
     );
+    console.error("Failed to update task:", errorMessage);
     return false;
   }
 }
@@ -189,10 +170,16 @@ export async function deleteRememoTask(task: {
   }
 
   const lineText = editor.document.lineAt(task.line).text;
+  console.log("Deleting task with line text:", lineText);
 
   const taskId = extractID(lineText);
+  console.log("Extracted task ID:", taskId);
 
-  const response = await fetch(`${backendUrl}/api/tasks`, {
+  const url = `${backendUrl}/api/tasks`;
+  console.log("Deleting task with URL:", url);
+  console.log("API Key:", token);
+
+  const response = await fetch(url, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -205,6 +192,9 @@ export async function deleteRememoTask(task: {
     }),
   });
 
+  console.log("Response status:", response.status);
+  console.log("Response headers:", response.headers);
+
   if (response.ok) {
     vscode.window.showInformationMessage("Task deleted on rememo.io");
     removeTaskIDFromComment(editor, task.line);
@@ -214,6 +204,7 @@ export async function deleteRememoTask(task: {
     vscode.window.showErrorMessage(
       `Failed to delete task. Status: ${response.status}, Message: ${errorMessage}`
     );
+    console.error("Failed to delete task:", errorMessage);
     return false;
   }
 }

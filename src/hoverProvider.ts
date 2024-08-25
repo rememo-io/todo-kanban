@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import { taskExistsInRememo } from "./fetch";
 import { TODO_REGEX, FIXME_REGEX, FIX_REGEX } from "./config";
 import { parseCommentContent } from "./core";
 import { generateVscodeLink } from "./utils";

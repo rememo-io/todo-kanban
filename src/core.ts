@@ -7,7 +7,6 @@ import {
   FIXME_REGEX,
   TODO_REGEX,
 } from "./config";
-import { taskExistsInRememo } from "./fetch";
 
 export function extractTitle(commentText: string): string {
   const titleMatch = commentText.match(TITLE_REGEX);
