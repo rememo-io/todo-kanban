@@ -4,10 +4,6 @@ Todo-Kanban is a VS Code extension that enables TODO highlight and transforms yo
 
 <img src="https://raw.githubusercontent.com/rememo-io/todo-kanban/master/static/hero.webp">
 
-## The Problem:
-Developers often scatter TODOs, FIXMEs, and other notes throughout their codebase, intending to address them later. As projects expand, these comments can become overwhelming, forgotten, or ignored - potentially leading to missed deadlines or lingering issues.
-
-## The Solution:
 Todo-Kanban connects your code annotations directly to your Rememo.io Kanban board. This integration ensures that every TODO or FIXME becomes a trackable task, allowing for more effective work management and prioritization.
 
 ### Core Functionality:
